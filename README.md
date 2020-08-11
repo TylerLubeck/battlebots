@@ -154,8 +154,6 @@ This is to prevent people from using external resources to track other bot perfo
 
 Docker images must be published to Docker Hub. You can create an account at https://hub.docker.com/signup
 
-On tournament day, image names will be collected from participants. We'll then download the images and use the downloaded
-versions for the tournament - this means no updating images during the tournament!
 We're using Docker Hub over any internal image repositories for security, cost, and ease-of-use reasons.
 
 # The Tournament
@@ -164,3 +162,6 @@ The Tournament will consist of two competitions
 
 1. A rock/paper/scissors competition, run tournament bracket style
 2. An art competition, where conference attendees will vote on the best art piece created by your bot
+
+On tournament day, image names will be collected from participants. We'll then download the images and use the downloaded
+versions for the tournament - this means no updating images during the tournament!
