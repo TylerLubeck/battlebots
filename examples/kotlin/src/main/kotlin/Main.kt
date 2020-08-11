@@ -14,7 +14,7 @@ class BattleBotCmd : CliktCommand() {
         try {
             val history = historyStr.split(";")
             val move = App().play_turn(history)
-            echo(move.cheapJson())
+            echo(move.toJSON())
         } catch (e: Exception) {
             exitProcess(1)
         }

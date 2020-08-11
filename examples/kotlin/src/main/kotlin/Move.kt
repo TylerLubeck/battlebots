@@ -1,15 +1,15 @@
 package battlebot
 
+import com.google.gson.Gson
+
 enum class Hand {
     ROCK,
     PAPER,
     SCISSORS
 }
 
-data class Move(val move: Hand, val art: String) {
-    fun cheapJson(): String {
-        return """
-        |{"move": "${move}", "art": "${art}"}
-        """.trimMargin("|")
+data class Move(val move: Hand, val art: List<String> = emptyList()) {
+    fun toJSON(): String {
+        return Gson().toJson(this)
     }
 }
