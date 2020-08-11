@@ -8,7 +8,7 @@ enum Hand : String, CaseIterable, Codable {
 
 struct Move : Codable {
     var move : Hand
-    var art = ""
+    var art : [String] = []
 
     func toJSON() throws -> String {
         let data = try JSONEncoder().encode(self)
