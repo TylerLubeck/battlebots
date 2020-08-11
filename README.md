@@ -15,7 +15,7 @@ Each player must play one of "ROCK", "PAPER", or "SCISSORS".
 After each player submits their hand, the rules are decided as follows, moving to the next stage if the players tie
 1. Basic rock paper scissors rules. 
     - Rock beats Scissors
-    - Scissors beats Papoer
+    - Scissors beats Paper 
     - Paper beats Rock
 2. Whoever has played that hand more often in this game wins
 3. Whoever has played the hand that would beat this hand more often in this game wins
