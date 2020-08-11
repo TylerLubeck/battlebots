@@ -156,6 +156,7 @@ Docker images must be published to Docker Hub. You can create an account at http
 
 On tournament day, image names will be collected from participants. We'll then download the images and use the downloaded
 versions for the tournament - this means no updating images during the tournament!
+We're using Docker Hub over any internal image repositories for security, cost, and ease-of-use reasons.
 
 # The Tournament
 
