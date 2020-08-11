@@ -1,0 +1,42 @@
+/**
+ * This section is for all of the plugins we need to make this work. 
+ * Kotlin, the fat jar builder, and flag it 
+ * as an application so `./gradlw run` will work
+ */
+plugins {
+    id 'org.jetbrains.kotlin.jvm' version '1.3.72'
+    id 'com.github.johnrengelman.shadow' version '6.0.0'
+}
+
+apply plugin: 'application'
+
+repositories {
+    mavenCentral()
+}
+
+ext {
+    kotlinVersion = '1.3.72'
+}
+
+/**
+ * Standard dependency section for gradle. 
+ * Define the kotlin standard libray for
+ * Java 8.
+ */
+
+dependencies {
+    compile 'org.jetbrains.kotlin:kotlin-stdlib'
+    implementation 'com.github.ajalt:clikt:2.8.0'
+}
+
+application {
+    // Define the main startup class and jar name
+    mainClassName = 'battlebot.MainKt'
+}
+
+// tell the jar which class to startup in.
+jar {
+    manifest {
+        attributes 'Main-Class': 'battlebot.MainKt'
+    }
+}   
