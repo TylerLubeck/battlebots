@@ -97,9 +97,8 @@ These images will be displayed in some way during
 ```json
 {"art": [], "move": "MOVE"}
 ```
-The value for the `art` key can be up to a 60x60 grid of characters, with newline characters splitting up the grid.
-The idea is that each bot can produce some ascii art alongside their gameplay, and these images will be displayed
-in some form TBD.
+The value for the `art` key can be an array of up to 60 strings, and each of those strings can have a max of 60 characters.
+In effect, this gives a 60x60 grid to produce ascii art alongside your gameplay.
 
 For example, to embed the ascii image
 ```
@@ -126,8 +125,14 @@ For example, to embed the ascii image
 you would output
 
 ```json
-{"move": "ROCK", "art": [["     ***********                  ***********         "],["  *****************            *****************      "],["*********************        *********************    "],["***********************      ***********************  "],["************************    ************************  "],["*************************  *************************  "],[" **************************************************   "],["  ************************************************    "],["    ********************************************      "],["      ****************************************        "],["         **********************************           "],["           ******************************             "],["              ************************                "],["                ********************                  "],["                   **************                     "],["                     **********                       "],["                       ******                         "],["                         **                           "]]}
+{"move": "ROCK", "art": ["     ***********                  ***********         ","  *****************            *****************      ","*********************        *********************    ","***********************      ***********************  ","************************    ************************  ","*************************  *************************  "," **************************************************   ","  ************************************************    ","    ********************************************      ","      ****************************************        ","         **********************************           ","           ******************************             ","              ************************                ","                ********************                  ","                   **************                     ","                     **********                       ","                       ******                         ","                         **                           "]}
 ```
+
+The images collected from the 50 rounds of play will be strung together to form a gif, with each image being one frame in the gif. 
+
+As an example, the images in `sample-art` were strung together to create
+
+![Sample Gif](./sample-art/sample.gif)
 
 # Getting Started
 
