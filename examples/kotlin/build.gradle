@@ -27,6 +27,7 @@ ext {
 dependencies {
     compile 'org.jetbrains.kotlin:kotlin-stdlib'
     implementation 'com.github.ajalt:clikt:2.8.0'
+    implementation 'com.google.code.gson:gson:2.8.5'
 }
 
 application {
