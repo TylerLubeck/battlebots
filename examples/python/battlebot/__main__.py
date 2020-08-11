@@ -7,7 +7,7 @@ from .app import play_turn
 
 def main(argv):
     parser = argparse.ArgumentParser()
-    parser.add_argument("history", default="")
+    parser.add_argument("history", type=str, default="", nargs='?')
     args = parser.parse_args(argv)
 
     move = play_turn(args.history)
