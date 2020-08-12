@@ -22,7 +22,7 @@ After each player submits their hand, the rules are decided as follows, moving t
 4. Random Choice
 
 
-Each game will be played over the course of 50 rounds.
+Each game will be played over the course of 51 rounds.
 
 
 ## Example
@@ -128,7 +128,7 @@ you would output
 {"move": "ROCK", "art": ["     ***********                  ***********         ","  *****************            *****************      ","*********************        *********************    ","***********************      ***********************  ","************************    ************************  ","*************************  *************************  "," **************************************************   ","  ************************************************    ","    ********************************************      ","      ****************************************        ","         **********************************           ","           ******************************             ","              ************************                ","                ********************                  ","                   **************                     ","                     **********                       ","                       ******                         ","                         **                           "]}
 ```
 
-The images collected from the 50 rounds of play will be strung together to form a gif, with each image being one frame in the gif. 
+The images collected from the 51 rounds of play will be strung together to form a gif, with each image being one frame in the gif. 
 
 As an example, the images in `sample-art` were strung together to create
 
@@ -160,6 +160,29 @@ This is to prevent people from using external resources to track other bot perfo
 Docker images must be published to either Docker Hub or Github Packages. See me for more help if you need it.
 
 We're using external docker repositories over any internal image repositories for security, cost, and ease-of-use reasons.
+
+
+## Testing Your Bot with the Bot Runner
+
+To test your bot using the same bot runner that will be used for the tournament, run the following
+
+```bash
+# P1_IMAGE should be set to the name of your docker image
+P1_IMAGE=yourimage
+P1_NAME=yourname
+
+# P2_IMAGE is your opponent. You can test with friends, you can use the same as P1_IMAGE and test against yourself
+P2_IMAGE=opponentimage
+P2_NAME=opponentname
+
+docker run \
+    -t \
+    -v /var/run/docker.sock:/var/run/docker.sock \
+    -v $(pwd)/art:/art \
+    docker.pkg.github.com/tylerlubeck/battlebots/battlebots:latest \
+        rps $P1_NAME $P1_IMAGE $P2_NAME $P2_IMAGE /art --rounds 11
+```
+
 
 ## Testing ASCII Art
 
