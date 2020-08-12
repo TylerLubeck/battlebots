@@ -2,6 +2,7 @@ import logging
 from pathlib import Path  # For Typing
 import string
 from typing import Any
+from typing import BinaryIO
 from typing import List
 from typing import Union
 
@@ -20,7 +21,7 @@ def _point_to_pixel(point: int) -> int:
     return int(round(point * 96.0 / 72))
 
 
-def _get_font(font_path='cour.ttf', font_size=20) -> PIL.ImageFont:
+def _get_font(font_path='cour.ttf', font_size=20) -> PIL.ImageFont.ImageFont:
     """Load the specified font, or fallback to the system default
 
     Args:
@@ -42,7 +43,7 @@ def _get_font(font_path='cour.ttf', font_size=20) -> PIL.ImageFont:
     return font
 
 
-def _get_size(lines: List[str], font: PIL.ImageFont) -> (int, int, int):
+def _get_size(lines: List[str], font: PIL.ImageFont.ImageFont) -> (int, int, int):
     """Determine image width, height, and line spacing
 
     Args:
@@ -64,7 +65,7 @@ def _get_size(lines: List[str], font: PIL.ImageFont) -> (int, int, int):
     return width, height, line_spacing
 
 
-def create_frame(art: List[str]) -> PIL.Image:
+def create_frame(art: List[str]) -> PIL.Image.Image:
     """Create an image from the ascii art array
 
     Args:
@@ -93,7 +94,7 @@ def create_frame(art: List[str]) -> PIL.Image:
     return image
 
 
-def frames_to_gif(filename: Union[str, Path, file], frames: List[PIL.Image], frame_length=150):
+def frames_to_gif(filename: Union[str, Path, BinaryIO], frames: List[PIL.Image.Image], frame_length=150):
     """Generate a gif file from the supplied frames
 
     Args:
