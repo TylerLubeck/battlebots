@@ -1,5 +1,6 @@
-from typing import List
 import json
+from typing import List
+import uuid
 
 import docker
 
@@ -48,3 +49,15 @@ class DockerRunner:
             return json.loads(output)
         except json.JSONDecoder as e:
             raise RunnerFailure from e
+
+    def cleanup(self, game_id: uuid.UUID):
+        containers = self.client.containers.list(
+            all=True,
+            filters={
+                'label': [f'game_id={game_id}']
+            },
+            sparse=True
+        )
+
+        for c in containers:
+            c.remove(v=True, force=True)

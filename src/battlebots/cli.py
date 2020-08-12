@@ -1,5 +1,9 @@
 import os
 from pathlib import Path
+import uuid
+import random
+import json
+import string
 from typing import List
 from typing import Optional
 
@@ -52,39 +56,54 @@ def rps(
     player_one_image: str = typer.Argument(..., help="The docker image for the Player One"),
     player_two_name: str = typer.Argument(..., help="The name of Player Two"),
     player_two_image: str = typer.Argument(..., help="The docker image for the Player Two"),
-    gif_output_dir: Path = typer.Argument(..., help="The directory to output gifs in"),
+    output_dir: Path = typer.Argument(..., help="The directory to output game results to"),
     rounds: int = typer.Option(11, "--rounds"),
     debug: bool = typer.Option(False, "--debug"),
     skip_gif: bool = typer.Option(False, "--skip-gif"),
+    game_id: str = typer.Option(''.join(random.choice(string.ascii_lowercase) for _ in range(10))),
 ):
     """Run a Battle"""
     bot_runner = DockerRunner()
     p1 = Player(bot_runner, player_one_name, player_one_image)
     p2 = Player(bot_runner, player_two_name, player_two_image)
-    game = RockPaperScissorsGame(p1, p2)
 
     typer.secho("Starting Game!", err=True)
-    with typer.progressbar(range(rounds)) as progress:
-        for round in progress:
-            game.play_round()
+    game = RockPaperScissorsGame(game_id, p1, p2)
 
-    typer.secho(f"The winner is {game.current_winner}", err=True)
-    if skip_gif:
-        return
+    try:
+        with typer.progressbar(length=rounds) as progress:
+            # Some wonkiness to keep the game play and cli separate
+            progress_iter = iter(progress)
+            game.play_game(rounds=rounds, callback=lambda: next(progress_iter))
+    finally:
+        bot_runner.cleanup(game_id)
 
-    typer.secho(f"Generating Gifs")
 
     valid_p1_art = [m.art for m in game.p1_moves if m and m.art]
     valid_p2_art = [m.art for m in game.p1_moves if m and m.art]
 
-    if valid_p1_art:
+    if not skip_gif and valid_p1_art:
+        p1_path = output_dir / 'p1.gif'
+        typer.secho(f"Generating GIF for {p1.player_name} at {p1_path}", color=green, err=True)
         p1_frames = []
         for art in valid_p1_art:
             p1_frames.append(create_frame(art))
-        frames_to_gif(gif_output_dir / 'p1.gif', p1_frames, 120)
+        frames_to_gif(p1_path, p1_frames, 120)
 
-    if valid_p2_art:
+    if not skip_gif and valid_p2_art:
+        p2_path = output_dir / 'p2.gif'
+        typer.secho(f"Generating GIF for {p2.player_name} at {p2_path}", color=green, err=True)
         p2_frames = []
         for art in valid_p2_art:
             p2_frames.append(create_frame(art))
-        frames_to_gif(gif_output_dir / 'p2.gif', p2_frames, 120)
+        frames_to_gif(p2_path, p2_frames, 120)
+
+    winner = game.current_winner
+    if winner is not None:
+        typer.secho(f"{winner.player_name} Wins!", color="green")
+    else:
+        typer.secho("Draw!", color="red")
+
+    with open(output_dir / 'results.json', 'w') as f:
+        stats = game.stats()
+        json.dump(game.stats(), f)
