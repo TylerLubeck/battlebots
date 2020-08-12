@@ -1,26 +1,38 @@
 import logging
+from pathlib import Path  # For Typing
 import string
-
-from typing import List
 from typing import Any
+from typing import List
+from typing import Union
 
 import PIL
 import PIL.Image
 import PIL.ImageFont
-import PIL.ImageOps
 import PIL.ImageDraw
 
 PIXEL_ON = 0
 PIXEL_OFF = 255
-FONT_SIZE=20
 
 logger = logging.getLogger(__name__)
 
-def _point_to_pixel(point: int):
+def _point_to_pixel(point: int) -> int:
+    """IDK but it was in the example so"""
     return int(round(point * 96.0 / 72))
 
 
-def _get_font(font_path='cour.ttf', font_size=20):
+def _get_font(font_path='cour.ttf', font_size=20) -> PIL.ImageFont:
+    """Load the specified font, or fallback to the system default
+
+    Args:
+        font_path: The path to the truetype font file to load
+        font_size: The size of the font to load
+
+    Returns:
+        A loaded ImageFont file
+
+    Notes:
+        If the specified font_path is not available, we load the system default font
+    """
     try:
         font = PIL.ImageFont.truetype(font_path, size=font_size)
     except IOError:
@@ -30,7 +42,16 @@ def _get_font(font_path='cour.ttf', font_size=20):
     return font
 
 
-def _get_size(lines: List[Any], font) -> (int, int):
+def _get_size(lines: List[str], font: PIL.ImageFont) -> (int, int, int):
+    """Determine image width, height, and line spacing
+
+    Args:
+        lines: The lines that will make up the ASCII Image
+        font: The font to be used
+
+    Returns:
+        (width, height, line_spacing)
+    """
     max_width_line = max(lines, key=lambda s: font.getsize(s)[0])
     test_string = string.ascii_uppercase
     max_height = _point_to_pixel(font.getsize(string.ascii_uppercase)[1])
@@ -43,7 +64,15 @@ def _get_size(lines: List[Any], font) -> (int, int):
     return width, height, line_spacing
 
 
-def create_frame(art):
+def create_frame(art: List[str]) -> PIL.Image:
+    """Create an image from the ascii art array
+
+    Args:
+        art: A list of strings comprising an ASCII art image
+
+    Returns:
+        An image object with the rendered ASCII art
+    """
     lines = [l.rstrip() for l in art]  # We don't need trailing whitespace on the right hand side
 
     font = _get_font()
@@ -64,5 +93,12 @@ def create_frame(art):
     return image
 
 
-def frames_to_gif(filename, frames, frame_length=150):
+def frames_to_gif(filename: Union[str, Path, file], frames: List[PIL.Image], frame_length=150):
+    """Generate a gif file from the supplied frames
+
+    Args:
+      filename: The file path, or file pointer, to save the file to.
+      frames: A list of PIL images to include in the gif
+      frame_length: The amount of time, in ms, that a frame is displayed for
+    """
     frames[0].save(filename, save_all=True, append_images=frames[1:], optimize=False, duration=frame_length, loop=0)
