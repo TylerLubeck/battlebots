@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from setuptools import setup
+from pathlib import Path
 
 
 install_requires = [
@@ -15,11 +16,17 @@ entry_points = {
     ]
 }
 
+here = Path.resolve(Path(__file__).parent)
+def read(fname):
+    with open(here / fname, 'r') as f:
+        return f.read()
+
 setup_kwargs = {
     'name': 'battlebots',
-    'version': '0.1.0',
+    'version': '1.0.0',
     'description': 'BagelCon Battlebots Runner',
-    'long_description': 'The Battlebots runner',
+    'long_description': read('README.md'),
+    'long_description_content_type': 'text/markdown',
     'author': 'Tyler Lubeck',
     'author_email': 'tyler@tylerlubeck.com',
     'maintainer': None,
@@ -32,6 +39,5 @@ setup_kwargs = {
     'entry_points': entry_points,
     'python_requires': '>=3.8,<4.0',
 }
-
 
 setup(**setup_kwargs)
