@@ -3,13 +3,15 @@ from setuptools import setup
 
 
 install_requires = [
+    'colorama>=0.4.3,<=0.5.0',
     'docker>=4.2.2,<5.0.0',
-    'typer>=0.3.1,<0.4.0'
+    'typer>=0.3.1,<0.4.0',
+    'pillow>=7.2.0<8.0.0',
 ]
 
 entry_points = {
     'console_scripts': [
-        'battlebots = battlebots.__main__:entry'
+        'battlebots = battlebots.__main__:main'
     ]
 }
 
