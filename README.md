@@ -142,7 +142,7 @@ configured to produce a docker image that follows all of the rules and conventio
 So long as you also follow the rules and conventions described in this document, you're free to submit any docker
 image you like - there's no need to start with any of the provided examples.
 
-# Submitting Your Bot
+## Submitting Your Bot
 
 All bots must be submitted as runnable docker images. For a submitted image `IMAGE`, it will be run as
 ```bash
@@ -157,9 +157,26 @@ docker run \
 **Note:** `network=none` means that your code will not be able to access any form of network or internet at runtime.
 This is to prevent people from using external resources to track other bot performance.
 
-Docker images must be published to Docker Hub. You can create an account at https://hub.docker.com/signup
+Docker images must be published to either Docker Hub or Github Packages. See me for more help if you need it.
 
-We're using Docker Hub over any internal image repositories for security, cost, and ease-of-use reasons.
+We're using external docker repositories over any internal image repositories for security, cost, and ease-of-use reasons.
+
+## Testing ASCII Art
+
+To speed up ASCII Art testing, there's a utility built in to the battlebot runner to generate GIFs from ascii art files
+
+Create a folder and fill it with files representing the frames of your gif. These files must end in `.ascii` and will
+be loaded in alphabetical order to create frames.
+
+You can then create a gif as such:
+
+```bash
+IMAGE_PATH=/path/to/ascii/folder
+docker run \
+    -v ${IMAGE_PATH}:/images  \
+    docker.pkg.github.com/tylerlubeck/battlebots/battlebots:latest \
+        generate-gif /images /images/output.gif
+```
 
 # The Tournament
 
