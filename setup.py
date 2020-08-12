@@ -31,7 +31,7 @@ setup_kwargs = {
     'author_email': 'tyler@tylerlubeck.com',
     'maintainer': None,
     'maintainer_email': None,
-    'url': '',
+    'url': 'https://github.com/TylerLubeck/battlebots',
     'package_dir': {'': 'src'},
     'packages': ['battlebots'],
     'package_data': {'': ['*']},
