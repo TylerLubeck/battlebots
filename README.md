@@ -157,9 +157,9 @@ docker run \
 **Note:** `network=none` means that your code will not be able to access any form of network or internet at runtime.
 This is to prevent people from using external resources to track other bot performance.
 
-Docker images must be published to Docker Hub. You can create an account at https://hub.docker.com/signup
+Docker images must be published to either Docker Hub or Github Packages. See me for more help if you need it.
 
-We're using Docker Hub over any internal image repositories for security, cost, and ease-of-use reasons.
+We're using external docker repositories over any internal image repositories for security, cost, and ease-of-use reasons.
 
 ## Testing ASCII Art
 
@@ -171,7 +171,11 @@ be loaded in alphabetical order to create frames.
 You can then create a gif as such:
 
 ```bash
-docker run -v /path/to/ascii/folder:/images battlebots generate-gif /images /images/output.gif
+IMAGE_PATH=/path/to/ascii/folder
+docker run \
+    -v ${IMAGE_PATH}:/images  \
+    docker.pkg.github.com/tylerlubeck/battlebots/battlebots:latest \
+        generate-gif /images /images/output.gif
 ```
 
 # The Tournament
