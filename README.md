@@ -164,7 +164,7 @@ We're using external docker repositories over any internal image repositories fo
 
 ## Testing Your Bot with the Bot Runner
 
-To test your bot using the same bot runner that will be used for the tournament, run the following
+To test your bot using the same bot runner that will be used for the tournament, run the following (if you're having trouble pulling the image please refer to [the Github docker auth docs](https://docs.github.com/en/packages/using-github-packages-with-your-projects-ecosystem/configuring-docker-for-use-with-github-packages#authenticating-to-github-packages))
 
 ```bash
 # P1_IMAGE should be set to the name of your docker image
