@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from setuptools import setup
+from setuptools import setup, find_packages
 from pathlib import Path
 
 
@@ -33,7 +33,7 @@ setup_kwargs = {
     'maintainer_email': None,
     'url': 'https://github.com/TylerLubeck/battlebots',
     'package_dir': {'': 'src'},
-    'packages': ['battlebots'],
+    'packages': find_packages('src'),
     'package_data': {'': ['*']},
     'install_requires': install_requires,
     'entry_points': entry_points,
