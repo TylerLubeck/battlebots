@@ -84,7 +84,7 @@ def rps(
 
     if not skip_gif and valid_p1_art:
         p1_path = output_dir / 'p1.gif'
-        typer.secho(f"Generating GIF for {p1.player_name} at {p1_path}", color=green, err=True)
+        typer.secho(f"Generating GIF for {p1.player_name} at {p1_path}", color="green", err=True)
         p1_frames = []
         for art in valid_p1_art:
             p1_frames.append(create_frame(art))
@@ -92,7 +92,7 @@ def rps(
 
     if not skip_gif and valid_p2_art:
         p2_path = output_dir / 'p2.gif'
-        typer.secho(f"Generating GIF for {p2.player_name} at {p2_path}", color=green, err=True)
+        typer.secho(f"Generating GIF for {p2.player_name} at {p2_path}", color="green", err=True)
         p2_frames = []
         for art in valid_p2_art:
             p2_frames.append(create_frame(art))
