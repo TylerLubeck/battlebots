@@ -143,7 +143,7 @@ class RockPaperScissorsGame:
         p1_move = PlayerMove(**raw_p1_move) if raw_p1_move else None
         self.p1_moves.append(p1_move)
 
-        raw_p2_move = self.player_one.play_turn(self.game_id, self.history)
+        raw_p2_move = self.player_two.play_turn(self.game_id, self.history)
         p2_move = PlayerMove(**raw_p2_move) if raw_p2_move else None
         self.p2_moves.append(p2_move)
 
