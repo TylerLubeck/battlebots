@@ -154,11 +154,11 @@ class RockPaperScissorsGame:
                 self.history = f'{self.history};--0'
             elif p1_move is None:
                 # Player 1 forefeit, point for Player 2
-                self.history = f'{self.history};-{p2_move.hand}2'
+                self.history = f'{self.history};-{str(p2_move.hand)}2'
                 self.overall_winner += P2_POINT
             elif p2_move is None:
                 # Player 2 forefeit, point for Player 1
-                self.history = f'{self.history};{p1_move.hand}-1'
+                self.history = f'{self.history};{str(p1_move.hand)}-1'
                 self.overall_winner += P1_POINT
             return
 
@@ -168,7 +168,7 @@ class RockPaperScissorsGame:
         winner = check_winner(p1_move, p2_move, self.move_counter.copy())
         self.overall_winner += winner
 
-        self.history = f'{self.history};{p1_move.hand}{p2_move.hand}{1 if winner == -1 else 2};'
+        self.history = f'{self.history};{str(p1_move.hand)}{str(p2_move.hand)}{1 if winner == -1 else 2};'
 
     def play_game(self, rounds, callback=None):
         for _ in range(rounds):
