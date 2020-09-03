@@ -16,7 +16,3 @@ run: image  ## Run the image without any history
 .PHONY: run-with-history
 run-with-history: image  ## Run the image with a provided history
 	docker run -e PLAYER_NUMBER=1 --network=none $(IMAGE_TAG) "$(HISTORY)"
-
-.PHONY: push 
-push: image  ## pushthe docker image
-	docker push $(IMAGE_TAG)
