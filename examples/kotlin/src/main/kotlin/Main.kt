@@ -13,7 +13,8 @@ class BattleBotCmd : CliktCommand() {
     override fun run() {
         try {
             val history = historyStr.split(";")
-            val move = App().play_turn(history)
+            val playerNumber = System.getenv("PLAYER_NUMBER") ?: "-"
+            val move = App().play_turn(history, playerNumber)
             echo(move.toJSON())
         } catch (e: Exception) {
             exitProcess(1)

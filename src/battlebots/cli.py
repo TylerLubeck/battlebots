@@ -64,8 +64,8 @@ def rps(
 ):
     """Run a Battle"""
     bot_runner = DockerRunner()
-    p1 = Player(bot_runner, player_one_name, player_one_image)
-    p2 = Player(bot_runner, player_two_name, player_two_image)
+    p1 = Player(bot_runner, player_one_name, player_one_image, 1)
+    p2 = Player(bot_runner, player_two_name, player_two_image, 2)
 
     typer.secho("Starting Game!", err=True)
     game = RockPaperScissorsGame(game_id, p1, p2)

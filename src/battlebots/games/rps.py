@@ -65,16 +65,18 @@ class PlayerMove:
 
 class Player:
 
-    def __init__(self, bot_runner, player_name, image):
+    def __init__(self, bot_runner, player_name, image, player_number):
         self.bot_runner = bot_runner
         self.player_name = player_name
         self.image = image
+        self.player_number = str(player_number)
 
     def play_turn(self, game_id, history):
         try:
             output = self.bot_runner.run_container(
                 self.image,
                 command=[history],
+                environment={'PLAYER_NUMBER': self.player_number},
                 game_id=game_id,
             )
             return output
