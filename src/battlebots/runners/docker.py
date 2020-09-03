@@ -1,4 +1,5 @@
 import json
+from typing import Dict
 from typing import List
 import uuid
 
@@ -17,12 +18,14 @@ class DockerRunner:
         self,
         image: str,
         command: List[str],
+        environment: Dict[str, str],
         game_id: str,
     ):
         container = self.client.containers.run(
             image=image,
             command=command,
             detach=True,
+            environment=environment,
             labels={
                 "game_id": game_id
             },
