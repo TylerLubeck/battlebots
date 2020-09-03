@@ -9,8 +9,9 @@ struct BattleBot: ParsableCommand {
 
     func run() throws {
         let history_array = history.components(separatedBy: ";").filter({ !$0.isEmpty})
+        let playerNumber = ProcessInfo.processInfo.environment["PLAYER_NUMBER"] ?? "-"
         do {
-            let move = play_turn(history: history_array)
+            let move = play_turn(history: history_array, playerNumber: playerNumber)
             let s = try move.toJSON()
             print(s)
         } catch {

@@ -60,6 +60,8 @@ string of 3-tuples separated by `;` characters.
 
 Each of the 3-tuples is of the format `(player-one-hand,player-two-hand,winner)`
 
+Your container will also be booted with an environment variable `PLAYER_NUMBER` that will be set to either `"1"` or `"2"`, so you can tell which player you are in the history string. This is being provided as an environment variable rather than a command line argument to avoid breaking any existing bots with this last minute change.
+
 ### History Example
 
 If the provided history looks like `rp2;sp1` then
