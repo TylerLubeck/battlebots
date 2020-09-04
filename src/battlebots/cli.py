@@ -80,7 +80,7 @@ def rps(
 
 
     valid_p1_art = [m.art for m in game.p1_moves if m and m.art]
-    valid_p2_art = [m.art for m in game.p1_moves if m and m.art]
+    valid_p2_art = [m.art for m in game.p2_moves if m and m.art]
 
     if not skip_gif and valid_p1_art:
         p1_path = output_dir / 'p1.gif'
